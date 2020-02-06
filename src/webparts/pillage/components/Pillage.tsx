@@ -8,17 +8,19 @@ export default class Pillage extends React.Component<IPillageProps, {}> {
       <div className={styles.pillage}>
         <div className={styles.container}>
           <div className={styles.parent}>
-            <div className={styles.div1}>
+            <div className={styles.header}>
+
+              <div className={styles.image}>
                 <img src="/src/webparts/pillage/images/avatar.png" />
+              </div>
+              <div className={styles.displayName}>
+                <h1>DISPLAYNAME</h1>
+              </div>
               
+                
             </div>
 
-            <div className={styles.div2}>
-              <h1>DISPLAYNAME</h1>
-              
-            </div>
-
-            <div className={styles.div3}>
+            <div className={styles.nav}>
 
               <button className={styles.button}>Start raid</button>
               <button className={styles.button}>Train units</button>
@@ -26,7 +28,7 @@ export default class Pillage extends React.Component<IPillageProps, {}> {
               <button className={styles.button}>Hire mercs</button>
               <button className={styles.button}>Upgrades</button>
             </div>
-            <div className={styles.div4}><h1>DIV4</h1></div>
+            <div className={styles.main}><h1>DIV4</h1></div>
           </div>
         </div>
       </div>
