@@ -28,47 +28,6 @@ export default class Pillage extends React.Component<IPillageProps, {}> {
             </div>
             <div className={styles.div4}><h1>DIV4</h1></div>
           </div>
-
-
-
-
-          {/* <div className={styles.row}>
-            <div className={styles.column}>
-              <span className={styles.title}><h1>Welcome to Pillage</h1></span>
-            </div>
-
-              <div className={styles.column}>
-                <div className={styles.button}>
-                  <PrimaryButton text="Start raid" allowDisabledFocus />
-                  <span><p>stuff</p></span>
-                </div>
-              </div>
-              <div className={styles.column}>
-                <div className={styles.button}>
-                  <PrimaryButton text="Train units" allowDisabledFocus />
-                  <span>stuff</span>
-                </div>
-              </div>
-              <div className={styles.column}>
-                <div className={styles.button}>
-                  <PrimaryButton text="Merch trip" allowDisabledFocus />
-                  <span>stuff</span>
-                </div>
-              </div>
-              <div className={styles.column}>
-                <div className={styles.button}>
-                  <PrimaryButton text="Upgrades" allowDisabledFocus />
-                  <span>stuff</span>
-                </div>
-              </div>
-              <div className={styles.column}>
-                <div className={styles.button}>
-                  <PrimaryButton text="Hire mercs" allowDisabledFocus />
-                  <span>stuff</span>
-                </div>
-              </div>
-            
-          </div> */}
         </div>
       </div>
     );
