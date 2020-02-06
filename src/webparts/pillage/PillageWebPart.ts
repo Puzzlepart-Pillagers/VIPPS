@@ -12,7 +12,7 @@ import Pillage from './components/Pillage';
 import { IPillageProps } from './components/IPillageProps';
 
 export interface IPillageWebPartProps {
-  description: string;
+  useremail: string;
 }
 
 export default class PillageWebPart extends BaseClientSideWebPart<IPillageWebPartProps> {
@@ -21,7 +21,7 @@ export default class PillageWebPart extends BaseClientSideWebPart<IPillageWebPar
     const element: React.ReactElement<IPillageProps > = React.createElement(
       Pillage,
       {
-        description: this.properties.description
+        useremail: this.context.pageContext.user.email
       }
     );
 

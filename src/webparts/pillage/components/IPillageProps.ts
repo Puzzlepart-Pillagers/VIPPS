@@ -1,3 +1,3 @@
 export interface IPillageProps {
-  description: string;
+  useremail: string;
 }
