@@ -27,8 +27,6 @@ export default class Pillage extends React.Component<IPillageProps, {}> {
               <button className={styles.button}>Upgrades</button>
             </div>
             <div className={styles.div4}><h1>DIV4</h1></div>
-            <div className={styles.div5}><h1>DIV5</h1></div>
-            <div className={styles.div6}><h1>DIV6</h1></div>
           </div>
 
 

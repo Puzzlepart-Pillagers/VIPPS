@@ -10,8 +10,8 @@
 
   .parent {
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(9, 1fr);
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
@@ -34,14 +34,14 @@
     }
   }
   .div2 { 
-    grid-area: 1 / 2 / 2 / 10;
+    grid-area: 1 / 2 / 2 / 8;
     background-color: #07222b;
     border-style: solid;
     border-color: #a9a9a961;
     border-width: 1px;
   }
   .div3 { 
-    grid-area: 2 / 1 / 10 / 2;
+    grid-area: 2 / 1 / 6 / 2;
     background-color: #07222b;
     border-style: solid;
     border-color: #a9a9a961;
@@ -50,21 +50,7 @@
     padding: 0 20px 0 20px;
   }
   .div4 { 
-    grid-area: 9 / 2 / 10 / 10;
-    background-color: #07222b;
-    border-style: solid;
-    border-color: #a9a9a961;
-    border-width: 1px;
-  }
-  .div5 { 
-    grid-area: 2 / 9 / 9 / 10;
-    background-color: #07222b;
-    border-style: solid;
-    border-color: #a9a9a961;
-    border-width: 1px;
-  }
-  .div6 { 
-    grid-area: 2 / 2 / 9 / 9;
+    grid-area: 2 / 2 / 6 / 8;
     background-color: #07222b;
     border-style: solid;
     border-color: #a9a9a961;
