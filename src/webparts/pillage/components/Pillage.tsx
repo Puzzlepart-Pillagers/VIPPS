@@ -1,13 +1,6 @@
 import * as React from 'react';
 import styles from './Pillage.module.scss';
 import { IPillageProps } from './IPillageProps';
-import { DefaultButton, PrimaryButton, Stack, IStackTokens } from 'office-ui-fabric-react';
-
-export interface IButtonExampleProps {
-  // These are set based on the toggles shown above the examples (not needed in real code)
-  disabled?: boolean;
-  checked?: boolean;
-}
 
 export default class Pillage extends React.Component<IPillageProps, {}> {
   public render(): React.ReactElement<IPillageProps> {
@@ -27,21 +20,11 @@ export default class Pillage extends React.Component<IPillageProps, {}> {
 
             <div className={styles.div3}>
 
-              <div className={styles.button}>
-                <PrimaryButton text="Start raid" allowDisabledFocus />
-              </div>
-              <div className={styles.button}>
-                <PrimaryButton text="Train units" allowDisabledFocus />
-              </div>
-              <div className={styles.button}>
-                <PrimaryButton text="Merch trip" allowDisabledFocus />
-              </div>
-              <div className={styles.button}>
-                <PrimaryButton text="Upgrades" allowDisabledFocus />
-              </div>
-              <div className={styles.button}>
-                <PrimaryButton text="Hire mercs" allowDisabledFocus />
-              </div>
+              <button className={styles.button}>Start raid</button>
+              <button className={styles.button}>Train units</button>
+              <button className={styles.button}>Merch trip</button>
+              <button className={styles.button}>Hire mercs</button>
+              <button className={styles.button}>Upgrades</button>
             </div>
             <div className={styles.div4}><h1>DIV4</h1></div>
             <div className={styles.div5}><h1>DIV5</h1></div>
