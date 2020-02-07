@@ -4,8 +4,7 @@ import { IPillageProps } from './IPillageProps';
 import * as Helpers from '../helpers/helpers';
 import { IKing } from '../models/IKing';
 import { IUnit } from '../models/IUnit';
-
-const { useEffect, useState } = React;
+import image from './image';
 
 const fetchKing = async (userEmail: string) => {
     const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/GetKing?email=${userEmail}`);
@@ -19,14 +18,12 @@ const fetchKing = async (userEmail: string) => {
     return Helpers.mapJsonToUnits(json);
   };
 
-
-
 export default class Pillage extends React.Component<IPillageProps, {}> {
 
   public render(): React.ReactElement<IPillageProps> {
     let userEmail = this.props.useremail;
     let king = fetchKing(userEmail);
-    console.log(king);;
+    console.log(king);
     return (
       <div className={styles.pillage}>
         <div className={styles.container}>
@@ -34,7 +31,7 @@ export default class Pillage extends React.Component<IPillageProps, {}> {
             <div className={styles.header}>
               <div className={styles.headerLeft}>
                 <div className={styles.image}>
-                  <img src="/src/webparts/pillage/images/avatar.png" />
+                  <img src={image} />
                 </div>
                 <div className={styles.displayName}>
                   <h1>Odin</h1>
