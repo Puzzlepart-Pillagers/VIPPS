@@ -4,7 +4,7 @@ import { IPillageProps } from './IPillageProps';
 import * as Helpers from '../helpers/helpers';
 import { IKing } from '../models/IKing';
 import { IUnit } from '../models/IUnit';
-
+import image from './image';
 
 
 
@@ -38,7 +38,7 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
                 <>
                   <div className={styles.headerLeft}>
                     <div className={styles.image}>
-                      <img src="/src/webparts/pillage/images/avatar.png" />
+                      <img src={image} />
                     </div>
                     <div className={styles.displayName}>
                       <h1>{this.state.king.firstName}</h1>

@@ -7,28 +7,28 @@ export const GetKing = async (userEmail: string) => {
     let json = await res.json();
     return json.value.map(obj => {
         return {
-          email: obj.RowKey,
-          penning: obj.Penning,
-          lat: obj.lat,
-          lon: obj.lon
+            email: obj.RowKey,
+            penning: obj.Penning,
+            lat: obj.lat,
+            lon: obj.lon
         };
     })[0];
-}
+};
 
-export const GetUnits = async (userEmail:string) => {
+export const GetUnits = async (userEmail: string) => {
     let res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/GetKing?email=${userEmail}`);
     let json = await res.json();
     return json.value.map(obj => {
         return {
-          firstName: obj.FirstName,
-          lastName: obj.LastName,
-          xp: obj.XP,
-          level: obj.Level,
-          rank: obj.Rank,
-          dead: obj.Dead
+            firstName: obj.FirstName,
+            lastName: obj.LastName,
+            xp: obj.XP,
+            level: obj.Level,
+            rank: obj.Rank,
+            dead: obj.Dead
         };
     });
-}
+};
 
-export const CreateKing = async (userEmail:string) => {
-}
+export const CreateKing = async (userEmail: string) => {
+};
