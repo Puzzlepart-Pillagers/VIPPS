@@ -14,10 +14,10 @@ export default class Pillage extends React.Component<IPillageProps, {}> {
                   <img src="/src/webparts/pillage/images/avatar.png" />
                 </div>
                 <div className={styles.displayName}>
-                  <h1>DISPLAYNAME</h1>
+                  <h1>Odin</h1>
                 </div>
                 <div className={styles.level}>
-                  <h1>99</h1>
+                  <p>99</p>
                 </div>
               </div>
 
@@ -40,7 +40,7 @@ export default class Pillage extends React.Component<IPillageProps, {}> {
               <button className={styles.button}>Hire mercs</button>
               <button className={styles.button}>Upgrades</button>
             </div>
-            <div className={styles.main}><h1>DIV4</h1></div>
+            <div className={styles.main}><h1>MAIN CONTENT GOES HERE</h1></div>
           </div>
         </div>
       </div>
