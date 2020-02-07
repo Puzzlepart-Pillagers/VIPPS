@@ -26,6 +26,42 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
 
   }
 
+  public homeButtonClicked() {
+    var x = document.getElementById("main");
+    x.style.background = "#07222b";
+    x.innerHTML = "<h1>THIS IS YOUR HOME</h1>";
+  }
+
+  public raidButtonClicked() {
+    var x = document.getElementById("main");
+    x.style.background = "#7c2c2c";
+    x.innerHTML = "<h1>THIS IS WERE YOU GO TO RAID AND PILLAGE</h1>";
+  }
+
+  public trainButtonClicked() {
+    var x = document.getElementById("main");
+    x.style.background = "#3a7c2c";
+    x.innerHTML = "<h1>UNIT TRAINING CAMP</h1>";
+  }
+
+  public merchTripButtonClicked() {
+    var x = document.getElementById("main");
+    x.style.background = "#2c7a7c";
+    x.innerHTML = "<h1>THIS IS WERE YOU SEND MERCHANTS ON TRIPS</h1>";
+  }
+
+  public hireMercButtonClicked() {
+    var x = document.getElementById("main");
+    x.style.background = "#7c2c53";
+    x.innerHTML = "<h1>THIS IS WERE YOU HIRE MERCENARIES</h1>";
+  }
+
+  public upgradeButtonClicked() {
+    var x = document.getElementById("main");
+    x.style.background = "#797c2c";
+    x.innerHTML = "<h1>THIS IS WERE YOU UPGRADE STUFFS</h1>";
+  }
+
   public render(): React.ReactElement<IPillageProps> {
     let userEmail = this.props.useremail;
 
@@ -50,7 +86,7 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
 
                   <div className={styles.headerRight}>
                     <div className={styles.exp}>
-                    <h3>{this.state.units.length += 43} EXP</h3>
+                    <h3>{this.state.units.length + 43} EXP</h3>
                     </div>
                     <div className={styles.units}>
                       <h3>{this.state.units.length} UNITS</h3>
@@ -63,13 +99,17 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
               }
             </div>
             <div className={styles.nav}>
-              <button className={styles.button}>Start raid</button>
-              <button className={styles.button}>Train units</button>
-              <button className={styles.button}>Merch trip</button>
-              <button className={styles.button}>Hire mercs</button>
-              <button className={styles.button}>Upgrades</button>
+              <button onClick={this.homeButtonClicked} className={styles.button}>Home</button>
+              <button onClick={this.raidButtonClicked} className={styles.button}>Start raid</button>
+              <button onClick={this.trainButtonClicked} className={styles.button}>Train units</button>
+              <button onClick={this.merchTripButtonClicked} className={styles.button}>Merch trip</button>
+              <button onClick={this.hireMercButtonClicked} className={styles.button}>Hire mercs</button>
+              <button onClick={this.upgradeButtonClicked} className={styles.button}>Upgrades</button>
             </div>
-            <div className={styles.main}><h1>MAIN CONTENT GOES HERE</h1></div>
+
+            <div className={styles.main} id="main">
+              <h1>THIS IS YOUR HOME</h1>
+            </div>
           </div>
         </div>
       </div>
@@ -129,6 +169,7 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
     }
 
   }
+  
 
 
 }
