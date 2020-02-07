@@ -63,8 +63,17 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
   }
 
   public render(): React.ReactElement<IPillageProps> {
-    let userEmail = this.props.useremail;
-
+    let units = this.state.units
+    let level = 1;
+    let xp = 1;
+    if(units){
+      if(units.length>0){
+        units.map( unit =>{
+          xp += unit.level*unit.xp;
+          level += unit.level;
+        });
+      }
+    }
     return (
       <div className={styles.pillage}>
         <div className={styles.container}>
@@ -80,13 +89,13 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
                       <h1>{this.state.king.firstName} {this.state.king.lastName}</h1>
                     </div>
                     <div className={styles.level}>
-                    <p>{this.state.units.length*10}</p>
+                    <p>{level}</p>
                     </div>
                   </div>
 
                   <div className={styles.headerRight}>
                     <div className={styles.exp}>
-                    <h3>{this.state.units.length + 43} EXP</h3>
+                    <h3>{xp} EXP</h3>
                     </div>
                     <div className={styles.units}>
                       <h3>{this.state.units.length} UNITS</h3>
