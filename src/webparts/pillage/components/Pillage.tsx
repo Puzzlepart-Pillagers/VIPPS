@@ -18,7 +18,7 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
     this.state = {
       isLoading: true,
       king: null
-    }
+    };
   }
 
   public async componentDidMount() {
@@ -79,20 +79,20 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
     const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/GetKing?email=${userEmail}`);
     const json = await res.json();
     return Helpers.mapJsonToKing(json);
-  };
+  }
 
   private async fetchUnits(userEmail: string) {
     const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/GetUnits?email=${userEmail}`);
     const json = await res.json();
     return Helpers.mapJsonToUnits(json);
-  };
+  }
 
 
   private async fetchData() {
 
     const king = await this.fetchKing(this.props.useremail);
     if (king) {
-      const units = await this.fetchUnits(this.props.useremail)
+      const units = await this.fetchUnits(this.props.useremail);
       this.setState({ king, units, isLoading: false });
     }
 
