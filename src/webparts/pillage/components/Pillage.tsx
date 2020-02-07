@@ -41,17 +41,17 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
                       <img src={image} />
                     </div>
                     <div className={styles.displayName}>
-                      <h1>{this.state.king.firstName}</h1>
+                      <h1>{this.state.king.firstName} {this.state.king.lastName}</h1>
                     </div>
-                    <div className={styles.level}>
+                    {/* <div className={styles.level}>
                       <p>99</p>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className={styles.headerRight}>
-                    <div className={styles.exp}>
+                    {/* <div className={styles.exp}>
                       <h3>1337 EXP</h3>
-                    </div>
+                    </div> */}
                     <div className={styles.units}>
                       <h3>{this.state.units.length} UNITS</h3>
                     </div>
