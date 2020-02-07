@@ -21,7 +21,7 @@ export default class PillageWebPart extends BaseClientSideWebPart<IPillageWebPar
     const element: React.ReactElement<IPillageProps > = React.createElement(
       Pillage,
       {
-        useremail: this.context.pageContext.user.email
+        useremail: this.context.pageContext.user.email.toLocaleLowerCase()
       }
     );
 

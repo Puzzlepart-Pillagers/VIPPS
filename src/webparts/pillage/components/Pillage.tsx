@@ -1,9 +1,32 @@
 import * as React from 'react';
 import styles from './Pillage.module.scss';
 import { IPillageProps } from './IPillageProps';
+import * as Helpers from '../helpers/helpers';
+import { IKing } from '../models/IKing';
+import { IUnit } from '../models/IUnit';
+
+const { useEffect, useState } = React;
+
+const fetchKing = async (userEmail: string) => {
+    const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/GetKing?email=${userEmail}`);
+    const json = await res.json();
+    return Helpers.mapJsonToKing(json);
+  };
+
+  const fetchUnits = async (userEmail: string) => {
+    const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/GetUnits?email=${userEmail}`);
+    const json = await res.json();
+    return Helpers.mapJsonToUnits(json);
+  };
+
+
 
 export default class Pillage extends React.Component<IPillageProps, {}> {
+
   public render(): React.ReactElement<IPillageProps> {
+    let userEmail = this.props.useremail;
+    let king = fetchKing(userEmail);
+    console.log(king);;
     return (
       <div className={styles.pillage}>
         <div className={styles.container}>
