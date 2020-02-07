@@ -158,7 +158,7 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
       let king : IKing  = 
       { email: this.props.useremail,
         firstName: this.props.useremail.split("@")[0],
-        lastName: this.props.useremail.split("@")[0],
+        lastName: (this.props.useremail.split("@")[0]+"sson"),
         penning: 1000,
         lat: "0",
         lon: "0",
