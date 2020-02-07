@@ -87,11 +87,43 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
     return Helpers.mapJsonToUnits(json);
   }
 
+  private async createKing(userEmail: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const body = {
+      "email":userEmail,
+      "FirstName":userEmail.split("@")[0],
+      "LastName":(userEmail.split("@")[0]+"sson"),
+      "Buff":1,
+      "Penning": 1000,
+      "lat":"0",
+      "lon":"0",
+      "XPGain":1
+    }
+    const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/CreateKing`, {
+      headers,
+      method: 'post',
+      body: JSON.stringify(body)
+    });
+  }
 
   private async fetchData() {
-
     const king = await this.fetchKing(this.props.useremail);
     if (king) {
+      const units = await this.fetchUnits(this.props.useremail);
+      this.setState({ king, units, isLoading: false });
+    }
+    else {
+      await this.createKing(this.props.useremail);
+      let king : IKing  = 
+      { email: this.props.useremail,
+        firstName: this.props.useremail.split("@")[0],
+        lastName: this.props.useremail.split("@")[0],
+        penning: 1000,
+        lat: "0",
+        lon: "0",
+        XPGain:1
+      }
       const units = await this.fetchUnits(this.props.useremail);
       this.setState({ king, units, isLoading: false });
     }
