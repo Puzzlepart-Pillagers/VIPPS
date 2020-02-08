@@ -154,6 +154,11 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
             </div>
 
             <div className={styles.main} id="main">
+
+              <VikingTrainingSimulator
+                userEmail={this.props.useremail}
+              />
+
               <h1>THIS IS YOUR HOME</h1>
               {!this.state.isLoading &&
                 <>
