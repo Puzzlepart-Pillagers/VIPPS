@@ -217,10 +217,6 @@ export const VikingTrainingSimulator: React.FC<IVikingTrainingSimulatorProps> = 
       {!isLoading && currentKing &&
         <>
           <div className={styles.infoView}>
-            <div className={styles.kingInfo}>
-              <div>{currentKing.firstName} {currentKing.lastName}</div>
-              <div>Penning: {currentKing.penning}</div>
-            </div>
             {selectedUnit &&
               <div className={styles.selectedUnit}>
                 <h3>{selectedUnit.firstName} {selectedUnit.lastName}</h3>

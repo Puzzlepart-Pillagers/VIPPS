@@ -138,19 +138,19 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
               <button onClick={this.homeButtonClicked} className={styles.button}>Home</button>
               <button onClick={this.trainButtonClicked} className={styles.button}>Train units</button>
               <button onClick={this.raidButtonClicked} className={styles.button}>Start raid</button>
-              {/* <button onClick={this.merchTripButtonClicked} className={styles.button}>Merch trip</button>
-              <button onClick={this.hireMercButtonClicked} className={styles.button}>Hire mercs</button>
-              <button onClick={this.upgradeButtonClicked} className={styles.button}>Upgrades</button> */}
             </div>
 
             <div className={styles.main}>
               <div className={styles.mainTrainUnits} id="mainTrainUnits">
+                <h1 className={styles.mainTrainUnitsText}>UNIT TRAINING CAMP</h1>
                 <VikingTrainingSimulator
                   userEmail={this.props.useremail}
                 />
               </div>
 
               <div className={styles.main} id="mainHome">
+                <div className={styles.mainHome}>
+                  <h1 className={styles.mainHomeText}>MAP LOCATION SETTER</h1>
                 {!this.state.isLoading &&
                   <>
                     <ReactBingmaps
@@ -174,10 +174,10 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
                         { addHandler: "click", callback: this.AddPushPinOnClick }
                       }
                     >
-
                     </ReactBingmaps>
                   </>
-                }
+                  }
+                </div>
               </div>
             </div>
           </div>
