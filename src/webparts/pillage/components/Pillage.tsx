@@ -41,6 +41,10 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
   public homeButtonClicked() {
     var _mainTrainUnits = document.getElementById("mainTrainUnits");
     var _mainHome = document.getElementById("mainHome");
+    var _mainHomeText = document.getElementById("mainHomeText");
+
+    _mainHome.style.background = "#07222b";
+    _mainHomeText.innerHTML = "SET YOUR LOCATION";
 
     _mainTrainUnits.style.display = "none";
     _mainHome.style.display = "block";
@@ -55,8 +59,18 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
   }
 
   public raidButtonClicked = () => {
-    this.setState({ showRaidmodal: true })
+    this.setState({ showRaidmodal: true });
+    var _mainTrainUnits = document.getElementById("mainTrainUnits");
+    var _mainHome = document.getElementById("mainHome");
+    var _mainHomeText = document.getElementById("mainHomeText");
+
+    _mainHome.style.background = "#9d1e1e";
+    _mainHomeText.innerHTML = "FOR VALHALLA!";
+
+    _mainTrainUnits.style.display = "none";
+    _mainHome.style.display = "block";
   }
+
   public merchTripButtonClicked() { }
   public hireMercButtonClicked() { }
   public upgradeButtonClicked() { }
@@ -92,7 +106,7 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
     return (
       <div className={styles.modalRaidInner}>
         {raiding &&
-          <Spinner  label='Raiding...' size={SpinnerSize.large} />
+          <Spinner label='Raiding...' size={SpinnerSize.large} />
         }
         {!raiding && raidResult &&
           <div className={styles.raidResult}>
@@ -199,46 +213,46 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
               <button onClick={this.homeButtonClicked} className={styles.button}>Home</button>
               <button onClick={this.trainButtonClicked} className={styles.button}>Train units</button>
               <button onClick={this.raidButtonClicked} className={styles.button}>Start raid</button>
-              {/* <button onClick={this.merchTripButtonClicked} className={styles.button}>Merch trip</button>
-              <button onClick={this.hireMercButtonClicked} className={styles.button}>Hire mercs</button>
-              <button onClick={this.upgradeButtonClicked} className={styles.button}>Upgrades</button> */}
             </div>
 
             <div className={styles.main}>
               <div className={styles.mainTrainUnits} id="mainTrainUnits">
+                <h1 className={styles.mainTrainUnitsText}>UNIT TRAINING CAMP</h1>
                 <VikingTrainingSimulator
                   userEmail={this.props.useremail}
                 />
               </div>
 
               <div className={styles.main} id="mainHome">
-                {!this.state.isLoading &&
-                  <>
-                    <ReactBingmaps
-                      bingmapKey="AqOjCBblrqG96QxoyrEnl2iSw6Y7_cI1QbUbrggrYkuq_LUsxTly5iUOQvXKzdGr"
-                      center={[this.state.initialPosition.lat, this.state.initialPosition.lon]}
-                      mapTypeId={"grayscale"}
-                      navigationBarMode="minified"
-                      disableStreetside={true}
-                      zoom={4}
-                      pushPins={
-                        [
-                          {
-                            "location": [this.state.king.lat, this.state.king.lon],
-                            "option": { color: '#1ab18891' },
-                            "addHandler": { "type": "click", callback: this.homeButtonClicked }
-                          },
+                <div className={styles.mainHome}>
+                  <h1 className={styles.mainHomeText} id="mainHomeText">SET YOUR LOCATION</h1>
+                  {!this.state.isLoading &&
+                    <>
+                      <ReactBingmaps
+                        bingmapKey="AqOjCBblrqG96QxoyrEnl2iSw6Y7_cI1QbUbrggrYkuq_LUsxTly5iUOQvXKzdGr"
+                        center={[this.state.initialPosition.lat, this.state.initialPosition.lon]}
+                        mapTypeId={"grayscale"}
+                        navigationBarMode="minified"
+                        disableStreetside={true}
+                        zoom={4}
+                        pushPins={
+                          [
+                            {
+                              "location": [this.state.king.lat, this.state.king.lon],
+                              "option": { color: '#1ab18891' },
+                              "addHandler": { "type": "click", callback: this.homeButtonClicked }
+                            },
 
-                        ]
-                      }
-                      getLocation={
-                        { addHandler: "click", callback: this.AddPushPinOnClick }
-                      }
-                    >
-
-                    </ReactBingmaps>
-                  </>
-                }
+                          ]
+                        }
+                        getLocation={
+                          { addHandler: "click", callback: this.AddPushPinOnClick }
+                        }
+                      >
+                      </ReactBingmaps>
+                    </>
+                  }
+                </div>
               </div>
             </div>
           </div>
