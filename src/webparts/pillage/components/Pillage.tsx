@@ -66,11 +66,14 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
 
   }
 
-  public UpdateLocation(location) {
-    let king = clone(this.state.king)
-    king.lat = location.latitude
-    king.lon = location.longitude
+  public async UpdateLocation(location) {
+    console.log(location);
+    let king = this.state.king
+    king["lat"] = location.latitude
+    king["lon"] = location.longitude
+    console.log(king);
     this.setState({ king, pendingLocation: null });
+    await this.setLocation(this.props.useremail);
   }
   public renderConfirmMoveModal() {
     return (
@@ -198,6 +201,24 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
     const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/GetUnits?email=${userEmail}`);
     const json = await res.json();
     return Helpers.mapJsonToUnits(json);
+  }
+
+  private async setLocation(userEmail: string) {
+    console.log("setting location")
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const body = {
+      email: userEmail,
+      lat: this.state.king.lat,
+      lon: this.state.king.lon
+    };
+    console.log(JSON.stringify(body));
+    const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/SetLocation`, {
+      headers,
+      method: 'post',
+      body: JSON.stringify(body)
+    });
+
   }
 
   private async createKing(userEmail: string) {
