@@ -5,16 +5,10 @@ import * as Helpers from '../helpers/helpers';
 import { IKing } from '../models/IKing';
 import { IUnit } from '../models/IUnit';
 import image from './image';
-
-
-
-
-
 export default class Pillage extends React.Component<IPillageProps, { units?: IUnit[], isLoading: boolean; king: IKing }> {
 
   constructor(props) {
     super(props);
-
     this.state = {
       isLoading: true,
       king: null
@@ -23,7 +17,6 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
 
   public async componentDidMount() {
     await this.fetchData();
-
   }
 
   public homeButtonClicked() {
@@ -176,9 +169,5 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
       const units = await this.fetchUnits(this.props.useremail);
       this.setState({ king, units, isLoading: false });
     }
-
   }
-  
-
-
 }
