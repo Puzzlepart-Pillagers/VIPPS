@@ -119,6 +119,9 @@
     -webkit-box-shadow: inset 25px -1px 36px -18px rgba(0,0,0,0.12);
     -moz-box-shadow: inset 25px -1px 36px -18px rgba(0,0,0,0.12);
     box-shadow: inset 25px -1px 36px -18px rgba(0,0,0,0.12);
+    [class^="NavBar_MapTypeButtonContainerWrapper"] {
+      display: none;
+    }
   }
 
   .title {

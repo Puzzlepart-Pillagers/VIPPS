@@ -25,6 +25,7 @@
     "@types/webpack-env": "1.13.1",
     "office-ui-fabric-react": "^6.182.0",
     "react": "16.8.5",
+    "react-bingmaps": "^3.6.1",
     "react-dom": "16.8.5"
   },
   "resolutions": {

@@ -5,6 +5,7 @@ import * as Helpers from '../helpers/helpers';
 import { IKing } from '../models/IKing';
 import { IUnit } from '../models/IUnit';
 import image from './image';
+import {ReactBingmaps } from 'react-bingmaps';
 
 
 
@@ -78,7 +79,7 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
       <div className={styles.pillage}>
         <div className={styles.container}>
           <div className={styles.parent}>
-            <div className={styles.header}>              
+            <div className={styles.header}>
               {!this.state.isLoading &&
                 <>
                   <div className={styles.headerLeft}>
@@ -118,6 +119,25 @@ export default class Pillage extends React.Component<IPillageProps, { units?: IU
 
             <div className={styles.main} id="main">
               <h1>THIS IS YOUR HOME</h1>
+              {!this.state.isLoading &&
+                <>
+                <ReactBingmaps 
+                  bingmapKey = "AqOjCBblrqG96QxoyrEnl2iSw6Y7_cI1QbUbrggrYkuq_LUsxTly5iUOQvXKzdGr" 
+                  center = {[this.state.king.lat,this.state.king.lon]} 
+                  mapTypeId = {"grayscale"}
+                  navigationBarMode = "minified"
+                  disableStreetside={true}
+                  zoom = {4}
+                  pushPins = {
+                    [
+                      {"location":[this.state.king.lat,this.state.king.lon], "options":{color: 'red'}, "addHandler": {"type":"click", callback:this.homeButtonClicked}}
+                    ]
+                  }
+                  >
+                
+                </ReactBingmaps>
+                </>
+              }
             </div>
           </div>
         </div>
