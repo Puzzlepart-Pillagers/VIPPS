@@ -187,3 +187,25 @@
     margin-right: 15px;
   }
 }
+
+.modalRaidInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100px;
+  width: auto;
+  padding: 10px 25px;
+
+  .raidResult {
+    display: flex;
+    flex-direction: column;
+    > button {
+      margin: 10px 0;
+    }
+  }
+  .confirmButton {
+    background-color: #1ab188;
+    color: white;
+    margin-right: 15px;
+  }
+}

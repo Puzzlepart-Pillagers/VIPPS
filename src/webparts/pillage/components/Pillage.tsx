@@ -9,6 +9,7 @@ import { ReactBingmaps } from 'react-bingmaps';
 import { clone } from '@microsoft/sp-lodash-subset';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 
 
 import { VikingTrainingSimulator } from '../components/TrainingSimulator/VikingTrainingSimulator';
@@ -19,6 +20,9 @@ interface IPillageState {
   isLoading: boolean;
   king: IKing;
   pendingLocation?: any;
+  showRaidmodal?: boolean;
+  raiding?: boolean;
+  raidResult?: any;
 }
 export default class Pillage extends React.Component<IPillageProps, IPillageState> {
 
@@ -50,10 +54,12 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
     _mainHome.style.display = "none";
   }
 
-  public raidButtonClicked() { }
+  public raidButtonClicked = () => {
+    this.setState({ showRaidmodal: true })
+  }
   public merchTripButtonClicked() { }
   public hireMercButtonClicked() { }
-  public upgradeButtonClicked() {}
+  public upgradeButtonClicked() { }
 
   public AddPushPinOnClick = (location) => {
     this.setState({ pendingLocation: location });
@@ -81,6 +87,54 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
       </div>
     );
   }
+  public renderRaidModal() {
+    const { raiding, raidResult } = this.state;
+    return (
+      <div className={styles.modalRaidInner}>
+        {raiding &&
+          <Spinner  label='Raiding...' size={SpinnerSize.large} />
+        }
+        {!raiding && raidResult &&
+          <div className={styles.raidResult}>
+            <span>{raidResult.message}</span>
+            <DefaultButton text='Close' onClick={() => { this.setState({ showRaidmodal: false, raidResult: null, raiding: false }); }} />
+          </div>
+        }
+        {!raiding && !raidResult &&
+          <>
+            <div>
+              Do you want to raid here?
+        </div>
+            <div>
+              <PrimaryButton className={styles.confirmButton} text='RAID!' onClick={() => this.raid()} />
+              <DefaultButton text='Run away' onClick={() => { this.setState({ showRaidmodal: false }); }} />
+            </div>
+          </>
+        }
+      </div>
+    );
+  }
+
+  public raid() {
+    this.setState({ raiding: true });
+    let success = (Math.random() < 0.8);
+    let loot = Math.round(Math.random() * 100);
+    if (success) {
+      let message = "Congratulations, you pillaged " + loot.toString() + " penning!";
+      this.setState({ raidResult: { success, message } });
+      setTimeout(() => {
+        this.setState({ raiding: false });
+        this.updatePenning(loot);
+      }, 3000);
+    } else {
+      let message = "Shit, you failed. You lost " + loot.toString() + " penning!";
+      this.setState({ raidResult: { success, message } });
+      setTimeout(() => {
+        this.setState({ raiding: false });
+        this.updatePenning(-loot);
+      }, 3000);
+    }
+  }
 
   public render(): React.ReactElement<IPillageProps> {
     let units = this.state.units;
@@ -101,6 +155,13 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
             isOpen
           >
             {this.renderConfirmMoveModal()}
+          </Modal>
+        }
+        {this.state.showRaidmodal &&
+          <Modal
+            isOpen
+          >
+            {this.renderRaidModal()}
           </Modal>
         }
         <div className={styles.container}>
@@ -211,6 +272,24 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
       body: JSON.stringify(body)
     });
 
+  }
+
+  private async updatePenning(diff: number) {
+    let pennings = this.state.king.penning + diff;
+    let king = this.state.king;
+    king.penning = pennings;
+    let headers = new Headers();
+    this.setState({ king });
+    headers.append('Content-Type', 'application/json');
+    const body = {
+      email: this.props.useremail,
+      Penning: pennings
+    };
+    const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/SetPenning`, {
+      headers,
+      method: 'post',
+      body: JSON.stringify(body)
+    });
   }
 
   private async createKing(userEmail: string) {
