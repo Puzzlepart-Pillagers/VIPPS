@@ -120,20 +120,18 @@
     -moz-box-shadow: inset 25px -1px 36px -18px rgba(0, 0, 0, 0.12);
     box-shadow: inset 25px -1px 36px -18px rgba(0, 0, 0, 0.12);
     overflow: hidden;
-    > .mainTrainUnits {
-      display: none;
-    }
-    > .mainHome {
-      display: block;
-    }
-
     [class^="NavBar_MapTypeButtonContainerWrapper"] {
       display: none;
     }
     [class^="bm_LocateMeControl"] {
       display: none;
     }
-    
+    .mainTrainUnits {
+      display: none;
+    }
+    .mainHome {
+      display: block;
+    }
   }
 
   .title {
