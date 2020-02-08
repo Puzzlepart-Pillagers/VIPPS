@@ -42,9 +42,11 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
     var _mainTrainUnits = document.getElementById("mainTrainUnits");
     var _mainHome = document.getElementById("mainHome");
     var _mainHomeText = document.getElementById("mainHomeText");
+    var _raidButton = document.getElementById("raidButton");
 
     _mainHome.style.background = "#07222b";
     _mainHomeText.innerHTML = "SET YOUR LOCATION";
+    _raidButton.style.backgroundColor = "#1ab188";
 
     _mainTrainUnits.style.display = "none";
     _mainHome.style.display = "block";
@@ -63,10 +65,11 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
     var _mainTrainUnits = document.getElementById("mainTrainUnits");
     var _mainHome = document.getElementById("mainHome");
     var _mainHomeText = document.getElementById("mainHomeText");
+    var _raidButton = document.getElementById("raidButton");
 
     _mainHome.style.background = "#9d1e1e";
     _mainHomeText.innerHTML = "FOR VALHALLA!";
-
+    _raidButton.style.backgroundColor = "#b11a1a";
     _mainTrainUnits.style.display = "none";
     _mainHome.style.display = "block";
   }
@@ -212,7 +215,7 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
             <div className={styles.nav}>
               <button onClick={this.homeButtonClicked} className={styles.button}>Home</button>
               <button onClick={this.trainButtonClicked} className={styles.button}>Train units</button>
-              <button onClick={this.raidButtonClicked} className={styles.button}>Start raid</button>
+              <button onClick={this.raidButtonClicked} className={styles.button} id="raidButton">Start raid</button>
             </div>
 
             <div className={styles.main}>
