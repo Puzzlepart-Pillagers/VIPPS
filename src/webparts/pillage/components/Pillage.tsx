@@ -56,17 +56,14 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
   public upgradeButtonClicked() {}
 
   public AddPushPinOnClick = (location) => {
-    console.log(location);
     this.setState({ pendingLocation: location });
 
   }
 
   public async UpdateLocation(location) {
-    console.log(location);
-    let king = this.state.king
-    king["lat"] = location.latitude
-    king["lon"] = location.longitude
-    console.log(king);
+    let king = this.state.king;
+    king["lat"] = location.latitude;
+    king["lon"] = location.longitude;
     this.setState({ king, pendingLocation: null });
     await this.setLocation(this.props.useremail);
   }
@@ -86,11 +83,6 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
   }
 
   public render(): React.ReactElement<IPillageProps> {
-    if (this.state.king) {
-
-      console.log(this.state.king.lat);
-    }
-
     let units = this.state.units;
     let level = 1;
     let xp = 1;
@@ -208,7 +200,6 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
   }
 
   private async setLocation(userEmail: string) {
-    console.log("setting location")
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     const body = {
@@ -216,7 +207,6 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
       lat: this.state.king.lat,
       lon: this.state.king.lon
     };
-    console.log(JSON.stringify(body));
     const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/SetLocation`, {
       headers,
       method: 'post',
