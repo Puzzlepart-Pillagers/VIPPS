@@ -87,8 +87,22 @@ export const VikingTrainingSimulator: React.FC<IVikingTrainingSimulatorProps> = 
     }
   };
 
+  const updateTotalXp = (xpToAdd: number) => {
+    let xp = 0;
+    if (units) {
+      if (units.length > 0) {
+        units.map(unit => {
+          xp += unit.level * unit.xp;
+        });
+      }
+    }
+    xp += xpToAdd;
+    props.updateXp(xp);
+  };
+
   const onTrainClick = (userEmail: string, unitId: string, unitXP: number, xpGain: number) => {
     const newXPValue = unitXP + xpGain;
+    updateTotalXp(xpGain);
     let unitsCopy: IUnit[] = clone(units);
     unitsCopy.forEach(unit => {
       if (unit.id === unitId) {

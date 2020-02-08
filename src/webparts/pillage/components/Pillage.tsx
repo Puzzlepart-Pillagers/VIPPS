@@ -23,6 +23,7 @@ interface IPillageState {
   showRaidmodal?: boolean;
   raiding?: boolean;
   raidResult?: any;
+  xp?: number;
 }
 export default class Pillage extends React.Component<IPillageProps, IPillageState> {
 
@@ -200,7 +201,7 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
 
                   <div className={styles.headerRight}>
                     <div className={styles.exp}>
-                      <h3>{xp} EXP</h3>
+                      <h3>{this.state.xp ? this.state.xp : xp} EXP</h3>
                     </div>
                     <div className={styles.units}>
                       <h3>{this.state.units.length} UNITS</h3>
@@ -221,9 +222,12 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
             <div className={styles.main}>
               <div className={styles.mainTrainUnits} id="mainTrainUnits">
                 <h1 className={styles.mainTrainUnitsText}>UNIT TRAINING CAMP</h1>
-                <VikingTrainingSimulator
-                  userEmail={this.props.useremail}
-                />
+                {this.state.king && !this.state.isLoading &&
+                  <VikingTrainingSimulator
+                    userEmail={this.props.useremail}
+                    updateXp={(newXp) => this.setState({ xp: newXp })}
+                  />
+                }
               </div>
 
               <div className={styles.main} id="mainHome">
@@ -263,6 +267,7 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
       </div>
     );
   }
+
   private async fetchKing(userEmail: string) {
     const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/GetKing?email=${userEmail}`);
     const json = await res.json();
