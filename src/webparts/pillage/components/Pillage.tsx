@@ -37,6 +37,10 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
   public homeButtonClicked() {
     var _mainTrainUnits = document.getElementById("mainTrainUnits");
     var _mainHome = document.getElementById("mainHome");
+    var _mainHomeText = document.getElementById("mainHomeText");
+
+    _mainHome.style.background = "#07222b";
+    _mainHomeText.innerHTML = "SET YOUR LOCATION";
 
     _mainTrainUnits.style.display = "none";
     _mainHome.style.display = "block";
@@ -50,7 +54,18 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
     _mainHome.style.display = "none";
   }
 
-  public raidButtonClicked() { }
+  public raidButtonClicked() {
+    var _mainTrainUnits = document.getElementById("mainTrainUnits");
+    var _mainHome = document.getElementById("mainHome");
+    var _mainHomeText = document.getElementById("mainHomeText");
+
+    _mainHome.style.background = "#9d1e1e";
+    _mainHomeText.innerHTML = "FOR VALHALLA!";
+
+    _mainTrainUnits.style.display = "none";
+    _mainHome.style.display = "block";
+  }
+
   public merchTripButtonClicked() { }
   public hireMercButtonClicked() { }
   public upgradeButtonClicked() {}
@@ -150,7 +165,7 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
 
               <div className={styles.main} id="mainHome">
                 <div className={styles.mainHome}>
-                  <h1 className={styles.mainHomeText}>MAP LOCATION SETTER</h1>
+                  <h1 className={styles.mainHomeText} id="mainHomeText">SET YOUR LOCATION</h1>
                 {!this.state.isLoading &&
                   <>
                     <ReactBingmaps
