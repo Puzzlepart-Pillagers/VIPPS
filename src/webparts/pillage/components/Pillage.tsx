@@ -10,6 +10,9 @@ import { clone } from '@microsoft/sp-lodash-subset';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
 
+
+import { VikingTrainingSimulator } from '../components/TrainingSimulator/VikingTrainingSimulator';
+
 interface IPillageState {
   initialPosition?: any;
   units?: IUnit[];
@@ -32,33 +35,25 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
   }
 
   public homeButtonClicked() {
-    window.location.reload();
-  }
+    var _mainTrainUnits = document.getElementById("mainTrainUnits");
+    var _mainHome = document.getElementById("mainHome");
 
-  public raidButtonClicked() {
-    var x = document.getElementById("main");
-    x.innerHTML = "<h1>THIS IS WERE YOU GO TO RAID AND PILLAGE</h1>";
+    _mainTrainUnits.style.display = "none";
+    _mainHome.style.display = "block";
   }
 
   public trainButtonClicked() {
-    var x = document.getElementById("main");
-    x.innerHTML = "<h1>UNIT TRAINING CAMP</h1>";
+    var _mainTrainUnits = document.getElementById("mainTrainUnits");
+    var _mainHome = document.getElementById("mainHome");
+
+    _mainTrainUnits.style.display = "block";
+    _mainHome.style.display = "none";
   }
 
-  public merchTripButtonClicked() {
-    var x = document.getElementById("main");
-    x.innerHTML = "<h1>THIS IS WERE YOU SEND MERCHANTS ON TRIPS</h1>";
-  }
-
-  public hireMercButtonClicked() {
-    var x = document.getElementById("main");
-    x.innerHTML = "<h1>THIS IS WERE YOU HIRE MERCENARIES</h1>";
-  }
-
-  public upgradeButtonClicked() {
-    var x = document.getElementById("main");
-    x.innerHTML = "<h1>THIS IS WERE YOU UPGRADE STUFFS</h1>";
-  }
+  public raidButtonClicked() { }
+  public merchTripButtonClicked() { }
+  public hireMercButtonClicked() { }
+  public upgradeButtonClicked() {}
 
   public AddPushPinOnClick = (location) => {
     console.log(location);
@@ -93,10 +88,10 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
   public render(): React.ReactElement<IPillageProps> {
     if (this.state.king) {
 
-      console.log(this.state.king.lat)
+      console.log(this.state.king.lat);
     }
 
-    let units = this.state.units
+    let units = this.state.units;
     let level = 1;
     let xp = 1;
     if (units) {
@@ -149,42 +144,51 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
             </div>
             <div className={styles.nav}>
               <button onClick={this.homeButtonClicked} className={styles.button}>Home</button>
-              <button onClick={this.raidButtonClicked} className={styles.button}>Start raid</button>
               <button onClick={this.trainButtonClicked} className={styles.button}>Train units</button>
+              {/* <button onClick={this.raidButtonClicked} className={styles.button}>Start raid</button>
               <button onClick={this.merchTripButtonClicked} className={styles.button}>Merch trip</button>
               <button onClick={this.hireMercButtonClicked} className={styles.button}>Hire mercs</button>
-              <button onClick={this.upgradeButtonClicked} className={styles.button}>Upgrades</button>
+              <button onClick={this.upgradeButtonClicked} className={styles.button}>Upgrades</button> */}
             </div>
 
-            <div className={styles.main} id="main">
-              <h1>THIS IS YOUR HOME</h1>
-              {!this.state.isLoading &&
-                <>
-                  <ReactBingmaps
-                    bingmapKey="AqOjCBblrqG96QxoyrEnl2iSw6Y7_cI1QbUbrggrYkuq_LUsxTly5iUOQvXKzdGr"
-                    center={[this.state.initialPosition.lat, this.state.initialPosition.lon]}
-                    mapTypeId={"grayscale"}
-                    navigationBarMode="minified"
-                    disableStreetside={true}
-                    zoom={4}
-                    pushPins={
-                      [
-                        {
-                          "location": [this.state.king.lat, this.state.king.lon],
-                          "option": { color: '#1ab18891' },
-                          "addHandler": { "type": "click", callback: this.homeButtonClicked }
-                        },
+            <div className={styles.main}>
+              <div className={styles.mainTrainUnits}>
+                <VikingTrainingSimulator
+                  userEmail={this.props.useremail}
+                />
+              </div>
+            </div>
 
-                      ]
-                    }
-                    getLocation={
-                      { addHandler: "click", callback: this.AddPushPinOnClick }
-                    }
-                  >
+            <div className={styles.main}>
+              <div className={styles.mainHome}>
+                {!this.state.isLoading &&
+                  <>
+                    <ReactBingmaps
+                      bingmapKey="AqOjCBblrqG96QxoyrEnl2iSw6Y7_cI1QbUbrggrYkuq_LUsxTly5iUOQvXKzdGr"
+                      center={[this.state.initialPosition.lat, this.state.initialPosition.lon]}
+                      mapTypeId={"grayscale"}
+                      navigationBarMode="minified"
+                      disableStreetside={true}
+                      zoom={4}
+                      pushPins={
+                        [
+                          {
+                            "location": [this.state.king.lat, this.state.king.lon],
+                            "option": { color: '#1ab18891' },
+                            "addHandler": { "type": "click", callback: this.homeButtonClicked }
+                          },
 
-                  </ReactBingmaps>
-                </>
-              }
+                        ]
+                      }
+                      getLocation={
+                        { addHandler: "click", callback: this.AddPushPinOnClick }
+                      }
+                    >
+
+                    </ReactBingmaps>
+                  </>
+                }
+              </div>
             </div>
           </div>
         </div>
@@ -233,7 +237,7 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
       "lat": "0",
       "lon": "0",
       "XPGain": 1
-    }
+    };
     const res = await fetch(`https://pillagers-storage-functions.azurewebsites.net/api/CreateKing`, {
       headers,
       method: 'post',
@@ -249,6 +253,7 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
     }
     else {
       await this.createKing(this.props.useremail);
+      // tslint:disable-next-line: no-shadowed-variable
       let king: IKing =
       {
         email: this.props.useremail,
@@ -258,7 +263,7 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
         lat: "0",
         lon: "0",
         XPGain: 1
-      }
+      };
       const units = await this.fetchUnits(this.props.useremail);
       this.setState({ king, units, isLoading: false });
     }
