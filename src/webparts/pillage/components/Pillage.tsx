@@ -137,22 +137,20 @@ export default class Pillage extends React.Component<IPillageProps, IPillageStat
             <div className={styles.nav}>
               <button onClick={this.homeButtonClicked} className={styles.button}>Home</button>
               <button onClick={this.trainButtonClicked} className={styles.button}>Train units</button>
-              {/* <button onClick={this.raidButtonClicked} className={styles.button}>Start raid</button>
-              <button onClick={this.merchTripButtonClicked} className={styles.button}>Merch trip</button>
+              <button onClick={this.raidButtonClicked} className={styles.button}>Start raid</button>
+              {/* <button onClick={this.merchTripButtonClicked} className={styles.button}>Merch trip</button>
               <button onClick={this.hireMercButtonClicked} className={styles.button}>Hire mercs</button>
               <button onClick={this.upgradeButtonClicked} className={styles.button}>Upgrades</button> */}
             </div>
 
             <div className={styles.main}>
-              <div className={styles.mainTrainUnits}>
+              <div className={styles.mainTrainUnits} id="mainTrainUnits">
                 <VikingTrainingSimulator
                   userEmail={this.props.useremail}
                 />
               </div>
-            </div>
 
-            <div className={styles.main}>
-              <div className={styles.mainHome}>
+              <div className={styles.main} id="mainHome">
                 {!this.state.isLoading &&
                   <>
                     <ReactBingmaps
